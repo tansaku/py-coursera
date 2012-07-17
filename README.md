@@ -11,5 +11,5 @@ This repository is a placeholder for any and all attempts to replicate parts of 
 
 In the first instance we'll attempt to recreate the ML/PGM Octave tutorials using the Enthought SciPy/Python distribution.  Here's the start of a transcript based on Prof Ng's [Octave transcript](http://spark-university.s3.amazonaws.com/stanford-pgm/slides/octave_session.m)
 
-[ipython transcript](ipython_transcript.txt)
+[ipython session (sort of)](https://github.com/tansaku/py-coursera/blob/master/ipython_session.py)
 
