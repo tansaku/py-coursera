@@ -13,3 +13,15 @@ In the first instance we'll attempt to recreate the ML/PGM Octave tutorials usin
 
 [ipython session (sort of)](https://github.com/tansaku/py-coursera/blob/master/ipython_session.py)
 
+Let me elaborate, iPython is Python with a high powered interactive shell:
+
+[http://ipython.org/](http://ipython.org/)
+
+which we've pulled in as part of the one click install Enthought distribution.
+
+[http://www.enthought.com/](http://www.enthought.com/)
+
+This [ipython_session](https://github.com/tansaku/py-coursera/blob/master/ipython_session.py) thing is unfortunately incomplete at present :-(  We've just got started and have only finished translating the first couple of sections.  Note the change from python to Octave comments.
+
+The rest is TODO - We'll keep working on it, but all help appreciated it.  Please let us know your github id if you'd like to collaborate. Feel free to email [sjoseph@hpu.edu](sjoseph@hpu.edu).
+
