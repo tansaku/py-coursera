@@ -33,6 +33,7 @@ print '6 decimals: %0.6f' % a
 # format long
 # format short
 
+# This is where we are up to so far.  Everything below is still Prof Ng's Octave tutorial session.  This will gradually be convrted to Python
 
 %%  vectors and matrices
 A = [1 2; 3 4; 5 6]
