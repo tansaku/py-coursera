@@ -33,15 +33,17 @@ print '6 decimals: %0.6f' % a
 # format long
 # format short
 
-# This is where we are up to so far.  Everything below is still Prof Ng's Octave tutorial session.  This will gradually be convrted to Python
 
-%%  vectors and matrices
-A = [1 2; 3 4; 5 6]
+#  vectors and matrices
+A = np.array([[1, 2], [3, 4], [5, 6]])  # Octave was A = [1 2; 3 4; 5 6]
 
-v = [1 2 3]
-v = [1; 2; 3]
-v = [1:0.1:2]  % from 1 to 2, with stepsize of 0.1. Useful for plot axes
-v = 1:6        % from 1 to 6, assumes stepsize of 1
+v = np.array([1,2,3])        # Octave was v = [1 2 3]
+v = np.array([[1],[2],[3]])  #  Octave was v = [1; 2; 3]
+v = np.linspace(1, 2, 11)   # from 1 to 2, with stepsize of 0.1. Useful for plot axes?  this was v = [1:0.1:2]
+v = np.arange(1,7)        # from 1 to 7 exclusive, assumes stepsize of 1.  this was v = 1:6
+
+# This is where we are up to so far.  Everything below is still Prof Ng's Octave tutorial session.  This will gradually be converted to Python
+
 
 C = 2*ones(2,3)  % same as C = [2 2 2; 2 2 2]
 w = ones(1,3)    % 1x3 vector of ones
