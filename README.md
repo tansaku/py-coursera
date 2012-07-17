@@ -7,7 +7,7 @@ The Coursera PGM and ML classes use [Octave](http://www.gnu.org/software/octave/
 
 While it may not be possible to create a perfect replacement for Octave many more programming experienced students would love to be working with Python rather than Octave, particularly because of support for testing, continuous integration and so forth.
 
-This repository is a placeholder for any and all attempts to replicate parts of the Coursera PGM and ML homework assignment code in Python.
+This repository is a placeholder for any and all attempts to replicate parts of the Coursera PGM and ML homework assignment code in Python.  It was created as part of [this discussion](https://class.coursera.org/pgm/forum/thread?thread_id=2382) in the PGM class, which annoyingly you will be unable to access if you didn't sign up for PGM first time around, so please contact [sjoseph@hpu.edu](sjoseph@hpu.edu) for a summary if you're interested.
 
 In the first instance we'll attempt to recreate the ML/PGM Octave tutorials using the Enthought SciPy/Python distribution.  Here's the start of a transcript based on Prof Ng's [Octave transcript](http://spark-university.s3.amazonaws.com/stanford-pgm/slides/octave_session.m)
 
