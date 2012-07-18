@@ -45,8 +45,8 @@ The rest is TODO - We'll keep working on it, but all help appreciated it.
 Please let us know your github id if you'd like to collaborate. Feel free to
 email [sjoseph@hpu.edu](mailto:sjoseph@hpu.edu).
 
-* OctaveTrans: [http://spark-university.s3.amazonaws.com/stanford-pgm/slides/octave_session.m](http://spark-university.s3.amazonaws.com/stanford-pgm/slides/octave_session.m)
-* IPSession: [https://github.com/tansaku/py-coursera/blob/master/ipython_session.py](https://github.com/tansaku/py-coursera/blob/master/ipython_session.py)
-* OrigDisc: [https://class.coursera.org/pgm/forum/thread?thread_id=2382](https://class.coursera.org/pgm/forum/thread?thread_id=2382)
+[OctaveTrans]: http://spark-university.s3.amazonaws.com/stanford-pgm/slides/octave_session.m
+[IPSession]: https://github.com/tansaku/py-coursera/blob/master/ipython_session.py
+[OrigDisc]: https://class.coursera.org/pgm/forum/thread?thread_id=2382
 
 Many thanks to all Contributors including [Jeff Tratner](https://github.com/jtratner), Arthur Dent, Andrew Clegg
