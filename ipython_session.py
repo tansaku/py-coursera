@@ -14,7 +14,7 @@
 1 == 2  # false
 1 != 2  # true.  note, not "~="
 1 and 0 and 2.0 # False --> shortcircuits
-1 & 0 & 2.0 # returns an error because can't compare int and float bit-wise
+#1 & 0 & 2.0 # returns an error because can't compare int and float bit-wise
 1 and 0 and 2.0
 1 or 0
 1 | 0 # bitwise/logical or
@@ -61,7 +61,7 @@ w = zeros([1,3])
 w = rand(1,3)  # drawn from a uniform distribution 
 w = randn(1,3) # drawn from a normal distribution (mean=0, var=1)
 w = -6 + sqrt(10)*(randn(1,10000))  # (mean = 1, var = 2)
-hist(w)
+# hist(w) # for some reason this command causes my computer to freeze up
 I = eye(4)    # 4x4 identity matrix
 
 # help function
@@ -74,8 +74,8 @@ help(rand)
 
 ## dimensions
 sz = shape(A) # gives dimensions
-size(A,1)  # number of rows
-size(A,2)  # number of cols
+size(A,0)  # number of rows
+size(A,1)  # number of cols
 max(shape(A))  # size of longest dimension
 A.shape # tuple of dimensions
 A.ndim # number of dimensions
@@ -83,16 +83,16 @@ A.ndim # number of dimensions
 
 
 # show current directory (current path)
-pwd #magic command for present working directory
-cd C:\Users\ang\Octave_files   # change directory 
-ls     # list files in current directory 
-q1y = fromfile("q1y.dat")
-q1y = fromfile("q1x.dat") 
+# %pwd #magic command for present working directory
+# # %cd C:\Users\ang\Octave_files   # change directory 
+# ls     # list files in current directory 
+# q1y = fromfile("q1y.dat")
+# q1y = fromfile("q1x.dat") 
 np.who()    # list *Numpy arrays* in given dictionary, if no dict given, shows
             # globals() [in IPython, this also shows all the `_` variables
-whos   # This is the equivalent of who in Octave
-del q1y       # deletes the identifier from namespace (and if no other refs, deletes altogether)
-v = q1x[1:10]
+# whos   # This is the equivalent of who in Octave
+# del q1y       # deletes the identifier from namespace (and if no other refs, deletes altogether)
+# v = q1x[1:10]
 save("my_file", v) # saves as my_file.npy
 # you can also save multiple with savez, load it with pickle and then access the arrays like a dictionary (see help(savez) for more)
 v.tofile("hello.txt", ";", format="%0.2f") # save v as a csv-ish file HOWEVER note that this loses precision, etc
@@ -108,7 +108,7 @@ A[(0, 2), :] = 5 # broadcast value
 print A
 
 A[:,1] = [10, 11, 12]     # change second column
-A += [100, 101, 102] # append column vec
+A += vstack([100, 101, 102]) # append column vec
 A.flatten() # output all elements as a 1D matrix
 A.flat # iterator over elements of A
 
@@ -182,11 +182,11 @@ pinv(A)       # inv(A'*A)*A'
 
 
 # =======================================================
-% Section 4: Octave Tutorial: Plotting 
+# Section 4: Octave Tutorial: Plotting 
 
 
-%% plotting
-t = concatenate(linspace(0, 0.1),linspace(0.1,0.98))
+## plotting
+t = concatenate((linspace(0, 0.1),linspace(0.1,0.98)))
 y1 = sin(2*pi*4*t)
 plot(t,y1)
 y2 = cos(2*pi*4*t)
@@ -197,20 +197,26 @@ legend('sin','cos')
 title('my plot')
 # to get a new plot, call figure
 fig2 = figure()
-# print -dpng 'myPlot.png'
+fig1 = getfigs(1)[0]
+print fig1 # shows the plot inline
+fig1.savefig("mygraph") # saves teh figure as "mygraph.png"
 
-# not sure how to do the following, stopping here
-figure(2), clf;  % can specify the figure number
-subplot(1,2,1);  % Divide plot into 1x2 grid, access 1st element
-plot(t,y1);
-subplot(1,2,2);  % Divide plot into 1x2 grid, access 2nd element
-plot(t,y2);
-axis([0.5 1 -1 1]);  % change axis scale
+subplot(1,2,1)  # Divide plot into 1x2 grid, access 1st element
+plot(t,y1)
+subplot(1,2,2)  # Divide plot into 1x2 grid, access 2nd element
+plot(t,y2)
+axis([0.5, 1, -1, 1])  # change axis scale
 
-%% display a matrix (or image) 
-figure;
-imagesc(magic(15)), colorbar, colormap gray;
-% comma-chaining function calls.  
+## display a matrix (or image) 
+fig3 = figure()
+img = imshow(rand(15,15))
+colorbar(img)
+gray() # set the colormap to gray
+fig4 = figure()
+colorbar(imshow(rand(15,15), cmap=cm.hot)) # all in one line
+print fig3
+print fig4
+# % comma-chaining function calls.  
 a=1;b=2;c=3 # can use semicolon to do multiple statements on a single line, but it's unpythonic
 
 
@@ -224,7 +230,7 @@ for i in range(10):
 
 i = 1
 while i <= 5:
-  v(i) = 100
+  v[i] = 100
   i += 1
 
 i = 1
@@ -246,6 +252,7 @@ exit # to quit
 
 def square_this_number(x):
     r = x * x
+    return r
 
 square_this_number(5)
 
@@ -253,7 +260,7 @@ square_this_number(5)
 # If you have defined other functions such as costFunctionJ, 
 # the following code will work too. 
 
-X = vstack(([1 1], [1 2], [1, 3]))
+X = vstack(([1, 1], [1, 2], [1, 3]))
 y = vstack((1,2,3))
 
 theta = vstack((0,1)) 
