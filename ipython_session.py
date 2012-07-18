@@ -45,6 +45,7 @@ print '2 decimals: %0.2f and 6 decimals: %0.6f' % (a, d) # for multiple need to 
 #  vectors and matrices
 
 #PKHG you forgot to to import np or from ... import numpy as * ???
+# SRHJ doesn't seem to be required in my enthought distribution - is already pre-imported I believe
 
 
 A = np.array([[1, 2], [3, 4], [5, 6]])  # Octave was A = [1 2; 3 4; 5 6]
