@@ -52,8 +52,6 @@ v = np.arange(1,7)        # from 1 to 7 exclusive, assumes stepsize of 1.  this 
 
 q = ones([5, 3, 2]) # multidimensional array
 
-# This is where we are up to so far.  Everything below is still Prof Ng's Octave tutorial session.  This will gradually be converted to Python
-
 
 C = 2 * ones([2,3])  # same as C = [[2 2 2],[2 2 2]] (NOTE: not sure whether better to do ones([1,3]) or ones((1,3)) in terms of readability
 w = ones([1,3])    # 1x3 vector of ones
