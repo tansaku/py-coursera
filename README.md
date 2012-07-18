@@ -20,8 +20,11 @@ This repository is a placeholder for any and all attempts to replicate parts of
 the Coursera PGM and ML homework assignment code in Python.  It was created as
 part of [this discussion][OrigDisc]
 in the PGM class, which annoyingly you will be unable to access if you didn't
-sign up for PGM first time around, so please contact
-[sjoseph@hpu.edu](mailto:sjoseph@hpu.edu) for a summary if you're interested.
+sign up for PGM first time around, so please email
+[py-coursera@googlegroups.com](mailto:py-coursera@googlegroups.com) for a summary 
+if you're interested.  By the time you read this there may a good summary in the archives:
+
+[https://groups.google.com/forum/#!forum/py-coursera](https://groups.google.com/forum/#!forum/py-coursera)
 
 In the first instance we'll attempt to recreate the ML/PGM Octave tutorials
 using the Enthought SciPy/Python distribution.  Here's the start of a
