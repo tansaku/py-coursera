@@ -91,7 +91,7 @@ A.ndim # number of dimensions
 # ls     # list files in current directory 
 # q1y = fromfile("q1y.dat")
 # q1y = fromfile("q1x.dat") 
-np.who()    # list *Numpy arrays* in given dictionary, if no dict given, shows
+who()    # list *Numpy arrays* in given dictionary, if no dict given, shows
             # globals() [in IPython, this also shows all the `_` variables
 # whos   # This is the equivalent of who in Octave
 # del q1y       # deletes the identifier from namespace (and if no other refs, deletes altogether)
@@ -128,7 +128,9 @@ vstack([A,B]) # makes a 6 x 2 matrix
 
 ## matrix operations
 A * B # element-wise multiplication
-matrix(A) * matrix(C) # matrix multiplication (not sure how to do this with arrays....)
+A.dot(C) # matrix multiplication
+matrix(A) * matrix(C) # matrix multiplication 
+# discussion of array vs matrix in numpy http://www.scipy.org/NumPy_for_Matlab_Users/#head-e9a492daa18afcd86e84e07cd2824a9b1b651935
 # A * C  or matrix(A) * matrix(B) gives error - wrong dimensions
 A ^ 2
 1. / v
