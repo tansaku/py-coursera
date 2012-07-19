@@ -24,7 +24,7 @@
 
 
 ## variable assignment
-a = 3
+a = 3; # note that semi-colon ';' is not required in python and has no effect except to allow multiple statements on one line
 b = 'hi'
 c = 3 >= 1
 d = 4
@@ -63,8 +63,8 @@ w = ones([1,3])    # 1x3 vector of ones
 w = zeros([1,3])
 w = rand(1,3)  # drawn from a uniform distribution 
 w = randn(1,3) # drawn from a normal distribution (mean=0, var=1)
-w = -6 + sqrt(10)*(randn(1,10000))  # (mean = 1, var = 2)
-# hist(w) # for some reason this command causes my computer to freeze up
+w = -6 + sqrt(10)*randn(10000)  # (mean = 1, var = 2)
+hist(w) # note that w needs to be a single dimension array like array([ 1.,  1.,  1.]) and not array([[ 1.,  1.,  1.]])
 I = eye(4)    # 4x4 identity matrix
 
 # help function
