@@ -30,7 +30,7 @@ In the first instance we'll attempt to recreate the ML/PGM Octave tutorials
 using the Enthought SciPy/Python distribution.  Here's the start of a
 transcript based on Prof Ng's [Octave transcript][OctaveTrans]
 
-[ipython session (sort of)](https://github.com/tansaku/py-coursera/blob/master/ipython_session.py)
+[ipython session](https://github.com/tansaku/py-coursera/blob/master/ipython_session.py)
 
 Let me elaborate, [IPython](http://ipython.org) is Python with a high powered interactive shell:
 
@@ -40,11 +40,10 @@ which we've pulled in as part of the one click install [Enthought distribution.]
 
 [http://www.enthought.com/](http://www.enthought.com/)
 
-This [ipython_session][IPSession] thing is unfortunately incomplete at present
-:-(  We've just got started and have only finished translating the first couple
-of sections.  Note the change from python to Octave comments.
+This [ipython_session][IPSession] thing now mostly complete due to some great work by 
+[Jeff Tratner](https://github.com/jtratner).
 
-The rest is TODO - We'll keep working on it, but all help appreciated it.
+The rest (PGM and ML assignments + infrastructure) is TODO - We'll keep working on it, but all help appreciated it.
 Please let us know your github id if you'd like to collaborate. Feel free to
 email [sjoseph@hpu.edu](mailto:sjoseph@hpu.edu).
 
