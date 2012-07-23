@@ -59,7 +59,7 @@ q = ones([5, 3, 2]) # multidimensional array
 
 
 C = 2 * ones([2,3])  # same as C = [[2 2 2],[2 2 2]] (NOTE: not sure whether better to do ones([1,3]) or ones((1,3)) in terms of readability
-w = ones([1,3])    # 1x3 vector of ones
+w = ones([1,3])    # 1x3 vector of ones - note that this could be ones(3)
 w = zeros([1,3])
 w = rand(1,3)  # drawn from a uniform distribution 
 w = randn(1,3) # drawn from a normal distribution (mean=0, var=1)

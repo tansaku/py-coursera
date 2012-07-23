@@ -4,14 +4,10 @@
 # -----------------------------------------------------------------------
 # We will use structures to implement the factor datatype. The code
 #
-#   phi = {'var': [3, 1, 2], 'card': [2, 2, 2], 'val': ones((1, 8))}
-
-# --------------------ABOVE CONVERTED TO PYTHON--------------------------
-# ----------------------------BELOW TODO---------------------------------
-
+#   phi = {'var': [3, 1, 2], 'card': [2, 2, 2], 'val': ones(8)}
 #
 # creates a factor over variables X_3, X_1, X_2, which are all binary
-# valued, because phi.card(1) (the cardinality of X_3, |Val(X_3)|) is 2, 
+# valued, because phi['card'][0] (the cardinality of X_3, |Val(X_3)|) is 2, 
 # and likewise for X_1 and X_2. phi has been initialized so that 
 # phi(X_3, X_1, X_2) = 1 for any assignment to the variables.
 #
@@ -24,23 +20,25 @@
 # -+-----+-----+-----+-------------------+   
 #  | X_3 | X_1 | X_2 | phi(X_3, X_1, X_2)|
 # -+-----+-----+-----+-------------------+
-#  |  1  |  1  |  1  |     phi.val(1)    |
+#  |  1  |  1  |  1  |   phi['val'][0]   |
 # -+-----+-----+-----+-------------------+
-#  |  2  |  1  |  1  |     phi.val(2)    |
+#  |  2  |  1  |  1  |   phi['val'][1]   |
 # -+-----+-----+-----+-------------------+
-#  |  1  |  2  |  1  |     phi.val(3)    |
+#  |  1  |  2  |  1  |   phi['val'][2]   |
 # -+-----+-----+-----+-------------------+
-#  |  2  |  2  |  1  |     phi.val(4)    |
+#  |  2  |  2  |  1  |   phi['val'][3]   |
 # -+-----+-----+-----+-------------------+
-#  |  1  |  1  |  2  |     phi.val(5)    |
+#  |  1  |  1  |  2  |   phi['val'][4]   |
 # -+-----+-----+-----+-------------------+
-#  |  2  |  1  |  2  |     phi.val(6)    |
+#  |  2  |  1  |  2  |   phi['val'][5]   |
 # -+-----+-----+-----+-------------------+
-#  |  1  |  2  |  2  |     phi.val(7)    |
+#  |  1  |  2  |  2  |   phi['val'][6]   |
 # -+-----+-----+-----+-------------------+
-#  |  2  |  2  |  2  |     phi.val(8)    |
+#  |  2  |  2  |  2  |   phi['val'][7]   |
 # -+-----+-----+-----+-------------------+
 #
+# --------------------ABOVE CONVERTED TO PYTHON--------------------------
+# ----------------------------BELOW TODO---------------------------------
 #
 # We have provided the AssignmentToIndex and IndexToAssignment functions
 # that compute the mapping between the assignments A and the variable indices I,
