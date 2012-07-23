@@ -20,4 +20,7 @@ def costFunctionJ(X, y, theta):
   # Note: grad should have the same dimensions as theta
   #
   
+  
+  # ===========================================
+  
   return J
