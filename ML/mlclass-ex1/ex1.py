@@ -35,7 +35,7 @@ print '5x5 Identity Matrix: '
 warmUpExercise()
 
 print('Program paused. Press enter to continue.');
-raw_input()
+#raw_input()
 
 
 ## ======================= Part 2: Plotting =======================
@@ -49,30 +49,30 @@ m = len(y); # number of training examples
 plotData(X, y);
 
 print 'Program paused. Press enter to continue.'
-raw_input()
+#raw_input()
 
 #  ALL BELOW IS TODO
-'''
+
 
 ## =================== Part 3: Gradient descent ===================
-print('Running Gradient Descent ...\n')
+print 'Running Gradient Descent ...'
 
-X = [ones(m, 1), data(:,1)]; # Add a column of ones to x
-theta = zeros(2, 1); # initialize fitting parameters
+X = array((ones((m, 1)), data[:,1])) # Add a column of ones to x
+theta = zeros((2, 1)) # initialize fitting parameters
 
 # Some gradient descent settings
-iterations = 1500;
-alpha = 0.01;
+iterations = 1500
+alpha = 0.01
 
 # compute and display initial cost
 computeCost(X, y, theta)
 
 # run gradient descent
-theta = gradientDescent(X, y, theta, alpha, iterations);
+theta = gradientDescent(X, y, theta, alpha, iterations)
 
 # print theta to screen
-print('Theta found by gradient descent: ');
-print('#f #f \n', theta(1), theta(2));
+print 'Theta found by gradient descent: '
+print '#f #f \n', theta(1), theta(2)
 
 # Plot the linear fit
 hold on; # keep previous plot visible
@@ -81,15 +81,15 @@ legend('Training data', 'Linear regression')
 hold off # don't overlay any more plots on this figure
 
 # Predict values for population sizes of 35,000 and 70,000
-predict1 = [1, 3.5] *theta;
-print('For population = 35,000, we predict a profit of #f\n',...
-    predict1*10000);
-predict2 = [1, 7] * theta;
-print('For population = 70,000, we predict a profit of #f\n',...
-    predict2*10000);
+predict1 = [1, 3.5] *theta
+print 'For population = 35,000, we predict a profit of #f\n' % predict1*10000
+predict2 = [1, 7] * theta
+print 'For population = 70,000, we predict a profit of #f\n' % predict2*10000
 
-print('Program paused. Press enter to continue.\n');
-pause;
+print 'Program paused. Press enter to continue.\n'
+raw_input()
+
+'''
 
 ## ============= Part 4: Visualizing J(theta_0, theta_1) =============
 print('Visualizing J(theta_0, theta_1) ...\n')
