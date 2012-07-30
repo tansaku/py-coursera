@@ -49,6 +49,7 @@ print '2 decimals: %0.2f and 6 decimals: %0.6f' % (a, d) # for multiple need to 
 
 
 A = np.array([[1, 2], [3, 4], [5, 6]])  # Octave was A = [1 2; 3 4; 5 6]
+# would be nice if numpy had a pretty print option for arrays that we could turn on by default ...
 
 v = hstack((1,2,3))        # Octave was v = [1 2 3]
 v = vstack((1,2,3))  #  Octave was v = [1; 2; 3] -- vstack takes a tuple of arrays (or single values in this case
@@ -59,7 +60,7 @@ q = ones([5, 3, 2]) # multidimensional array
 
 
 C = 2 * ones([2,3])  # same as C = [[2 2 2],[2 2 2]] (NOTE: not sure whether better to do ones([1,3]) or ones((1,3)) in terms of readability
-w = ones([1,3])    # 1x3 vector of ones - note that this could be ones(3)
+w = ones([1,3])    # 1x3 vector of ones - note that this could be ones(3), which in octave is a 3x3 matrix
 w = zeros([1,3])
 w = rand(1,3)  # drawn from a uniform distribution 
 w = randn(1,3) # drawn from a normal distribution (mean=0, var=1)
@@ -68,7 +69,7 @@ hist(w) # note that w needs to be a single dimension array like array([ 1.,  1.,
 I = eye(4)    # 4x4 identity matrix
 
 # help function
-help(eye) # even though correct without parens, this works even with `.` syntax
+help(eye) # use q to get out of help mode
 help(rand)
 
 # =======================================================
@@ -88,17 +89,19 @@ A.ndim # number of dimensions
 # show current directory (current path)
 # %pwd #magic command for present working directory
 # # %cd C:\Users\ang\Octave_files   # change directory 
-# ls     # list files in current directory 
-# q1y = fromfile("q1y.dat")
-# q1y = fromfile("q1x.dat") 
+ ls     # list files in current directory 
+ q1y = loadtxt("priceY.dat") 
+ q1x = loadtxt("featuresX.dat") # need loadtxt to grab multiple columns
 who()    # list *Numpy arrays* in given dictionary, if no dict given, shows
             # globals() [in IPython, this also shows all the `_` variables
 # whos   # This is the equivalent of who in Octave
-# del q1y       # deletes the identifier from namespace (and if no other refs, deletes altogether)
-# v = q1x[1:10]
-save("my_file", v) # saves as my_file.npy
+del q1y       # deletes the identifier from namespace (and if no other refs, deletes altogether)
+v = q1x[1:10] # note this takes all columns, unlike Octave which defaults to take first
+save("my_file", v) # saves as my_file.npy in binary format
 # you can also save multiple with savez, load it with pickle and then access the arrays like a dictionary (see help(savez) for more)
-v.tofile("hello.txt", ";", format="%0.2f") # save v as a csv-ish file HOWEVER note that this loses precision, etc
+savetxt("my_file.txt",v) # saves in textformat
+# can also dump using the following but probably not so useful ...
+#v.tofile("my_file.txt", ";", format="%0.2f") # save v as a csv-ish file HOWEVER note that this loses precision, and also the matrix structure ...
 # defaults for tofile are sep="" (binary format) and format="%s"
 
 ## indexing
@@ -107,17 +110,18 @@ A[1,:]  # get the 2nd row. (0-indexed)
         # ":" means every element along that dimension
 A[:,1]  # get the 2nd col
 A[(0,2),:]
-A[(0, 2), :] = 5 # broadcast value
+
+A[(0, 2), :] = 5 # set all of certain elements 'broadcast' value 
 print A
 
 A[:,1] = [10, 11, 12]     # change second column
-A += vstack([100, 101, 102]) # append column vec
-A.flatten() # output all elements as a 1D matrix
+A = hstack((A,vstack((1,2,3)))) # append column vec
+A.flatten() # output all elements as a 1D matrix, note this iterates over rows first, while Octave A(:) does columns first
 A.flat # iterator over elements of A
 
 # Putting data together 
 hstack([A, vstack((100, 101, 102))])
-B = [[11,12], [13, 14], [15, 16]] # same dims as A
+B = array([[11,12], [13, 14], [15, 16]]) # same dims as A
 hstack([A, B]) # makes a 3 x 4 matrix
 vstack([A,B]) # makes a 6 x 2 matrix
 
