@@ -20,7 +20,7 @@
 1 | 0 # bitwise/logical or
 1 | 0 | -5 # outputs -5
 1 or 0 or -5 # outputs 1
-1 ^ 0 # this is XOR in python
+1 ^ 0 # this is bitwise XOR in python
 
 
 ## variable assignment
@@ -81,22 +81,22 @@ sz = shape(A) # gives dimensions
 size(A,0)  # number of rows
 size(A,1)  # number of cols
 max(shape(A))  # size of longest dimension
-A.shape # tuple of dimensions
-A.ndim # number of dimensions
+A.shape # tuple of dimensions OR shape(A)
+A.ndim # number of dimensions OR ndim(A)
 
 
 
 # show current directory (current path)
 # %pwd #magic command for present working directory
 # # %cd C:\Users\ang\Octave_files   # change directory 
- ls     # list files in current directory 
- q1y = loadtxt("priceY.dat") 
- q1x = loadtxt("featuresX.dat") # need loadtxt to grab multiple columns
+ls     # list files in current directory 
+q1y = loadtxt("priceY.dat") 
+q1x = loadtxt("featuresX.dat") # need loadtxt to grab multiple columns
 who()    # list *Numpy arrays* in given dictionary, if no dict given, shows
             # globals() [in IPython, this also shows all the `_` variables
 # whos   # This is the equivalent of who in Octave
 del q1y       # deletes the identifier from namespace (and if no other refs, deletes altogether)
-v = q1x[1:10] # note this takes all columns, unlike Octave which defaults to take first
+v = q1x[0:10] # note this takes all columns, unlike Octave which defaults to take first
 save("my_file", v) # saves as my_file.npy in binary format
 # you can also save multiple with savez, load it with pickle and then access the arrays like a dictionary (see help(savez) for more)
 savetxt("my_file.txt",v) # saves in textformat
@@ -116,7 +116,8 @@ print A
 
 A[:,1] = [10, 11, 12]     # change second column
 A = hstack((A,vstack((1,2,3)))) # append column vec
-A.flatten() # output all elements as a 1D matrix, note this iterates over rows first, while Octave A(:) does columns first
+A.ravel() # output all elements as a 1D matrix colum, but default iterating rows first, while Octave A(:) does columns first
+A.flatten() # same as ravel as far as I can tell - pass order='F' as a parameter to get columns first
 A.flat # iterator over elements of A
 
 # Putting data together 
@@ -136,7 +137,8 @@ A.dot(C) # matrix multiplication
 matrix(A) * matrix(C) # matrix multiplication 
 # discussion of array vs matrix in numpy http://www.scipy.org/NumPy_for_Matlab_Users/#head-e9a492daa18afcd86e84e07cd2824a9b1b651935
 # A * C  or matrix(A) * matrix(B) gives error - wrong dimensions
-A ^ 2
+A ** 2 # or power(A,2*ones(shape(A))) does equivalent of Octave .^ 2
+v = array([[1],[2],[3]])
 1. / v
 log(v)  # functions like this operate element-wise on vecs or matrices 
 exp(v)  # e^<element>
@@ -147,17 +149,16 @@ v.any() # true iff *any* number > 0
 
 -v  # -1*v
 
-v + ones((1,size(v)))
-v + 1 == v + ones([1, size(v)])# v + 1  # same
+v + ones((shape(v))) # v + 1  # same
 
 A.transpose()  # matrix transpose
 
 ## misc useful functions
 
 # max  (or min)
-a = hstack([1, 15, 2, 0.5])
+a = array([1, 15, 2, 0.5])
 val = a.max()
-ind = find(a == a.max())
+val,ind = a.max(0),a.argmax(0)
 A.max(1) # print for each column
 A.max(0) # print max for each row
 a.min()
@@ -167,22 +168,23 @@ a.mean()
 a < 3
 find(a < 3) # returns the indices where condition is true for the *flattened* matrix
 
-# A = magic(3)
-find(A>=7)
+from magic_square import *
+A = magic(3) # magic square code here: http://pydoc.net/magic_square/
+find(A>=7) # as noted above, get index for flattened matrix
 
 # sum, prod
 sum(a)
 prod(a)
 floor(a) # or ceil(a)
-max(concatenate((rand(3),rand(3))))
-np.max(A,0)
-np.min(A,1)
-A = rand(9, 9) # note that rand is different b/c it's a convenience function
+maximum(rand(3,3),rand(3,3))
+[max(row) for row in A.transpose()] # not sure if we can go simpler - this is Octave target: max(A,[],1)
+[max(row) for row in A] # not sure if we can go simpler - this is Octave target: min(A,[],2)
+A = magic(9)
 
-np.sum(A,0) == A.sum(0)
-np.sum(A,1)
-sum(A * eye(9), 1) # default is for sum to sum all items
-sum( A * eye(9) )
+sum(A,0) # OR A.sum(0)
+sum(A,1)
+sum(sum(A * eye(9), 1)) 
+sum( A * eye(9) ) # default is for sum to sum all items
 sum( A * flipud(eye(9)))
 
 
