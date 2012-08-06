@@ -197,34 +197,32 @@ pinv(A)       # inv(A'*A)*A'
 
 
 ## plotting
-t = concatenate((linspace(0, 0.1),linspace(0.1,0.98)))
+t = linspace(0,0.98,99)
 y1 = sin(2*pi*4*t)
 plot(t,y1)
 y2 = cos(2*pi*4*t)
 plot(t,y2,'r')
 xlabel('time')
 ylabel('value')
-legend('sin','cos')
+legend(('sin','cos'))
 title('my plot')
+savefig('myplot.png') 
+close()
 # to get a new plot, call figure
-fig2 = figure()
-fig1 = getfigs(1)[0]
-print fig1 # shows the plot inline
-fig1.savefig("mygraph") # saves teh figure as "mygraph.png"
-
+fig2 = figure(); clf
 subplot(1,2,1)  # Divide plot into 1x2 grid, access 1st element
 plot(t,y1)
 subplot(1,2,2)  # Divide plot into 1x2 grid, access 2nd element
 plot(t,y2)
 axis([0.5, 1, -1, 1])  # change axis scale
 
-## display a matrix (or image) 
+## display a matrix (or image)  # imshow not working for Sam on OSX 10.6.8 ...
 fig3 = figure()
-img = imshow(rand(15,15))
+img = imshow(magic(15), cmap=gray)
 colorbar(img)
 gray() # set the colormap to gray
 fig4 = figure()
-colorbar(imshow(rand(15,15), cmap=cm.hot)) # all in one line
+colorbar(imshow(magic(15), cmap=cm.hot)) # all in one line
 print fig3
 print fig4
 # % comma-chaining function calls.  
@@ -235,20 +233,20 @@ a=1;b=2;c=3 # can use semicolon to do multiple statements on a single line, but 
 # Section 5: Octave Tutorial: For, while, if statements, and functions.
 
 v = zeros([10,1])
-for i in range(10): 
-    v[i] = 2^i
+for i in range(10): # note this runs from 0 to 9; python indices start at 0
+    v[i] = 2**i
 #Can also use "break" and "continue" inside for and while loops to control execution.
 
-i = 1
-while i <= 5:
+i = 0
+while i <= 4:
   v[i] = 100
   i += 1
 
-i = 1
+i = 0
 while True: 
   v[i] = 999
   i += 1
-  if i == 6:
+  if i == 5:
     break
 
 if v[1]==1:
@@ -258,15 +256,23 @@ elif v[1]==2:
 else:
   print('The value is not one or two!')
 
-exit # to quit
+# exit # to quit
+
 # Functions
 
-def square_this_number(x):
-    r = x * x
-    return r
+# Create a file called squareThisNumber.py with the following contents (without the #):
 
-square_this_number(5)
+#def squareThisNumber(x):
+#    r = x * x
+#    return r
 
+from squareThisNumber import *
+squareThisNumber(5)
+
+# If function is undefine, use "pwd" to check current directory (path), 
+# and "%cd" to change directories
+
+# not sure about addpath - got the whole pythonpath thing ...
 
 # If you have defined other functions such as costFunctionJ, 
 # the following code will work too. 
@@ -274,8 +280,8 @@ square_this_number(5)
 X = vstack(([1, 1], [1, 2], [1, 3]))
 y = vstack((1,2,3))
 
-theta = vstack((0,1)) 
-from cost_function import costFunctionJ
+theta = vstack((0,1))
+from costFunctionJ import costFunctionJ
 j = costFunctionJ(X, y, theta)
 
 theta = vstack((0,0)) 
@@ -285,5 +291,5 @@ j = costFunctionJ(X, y, theta)
 # Saving your session
 # You might want to save what you've done to run again in the future.  It's really easy to do, just type:
 
-%logstart "myfile.py"
+logstart "myfile.py"
 # this will create a logfile called "myfile.py" in the current directory with all of your work

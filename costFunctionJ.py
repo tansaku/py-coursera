@@ -1,3 +1,5 @@
+from numpy import * 
+
 def costFunctionJ(X, y, theta):
   #COSTFUNCTION Compute cost and gradient for logistic regression
   #   J = COSTFUNCTION(theta, X, y) computes the cost of using theta as the
