@@ -29,4 +29,4 @@ def gradientDescent(X, y, theta, alpha, num_iters):
   	J_history[iteration] = computeCost(X, y, theta)
   	#J_history(iter)
 
-  return theta, J_history
+  return (theta, J_history)

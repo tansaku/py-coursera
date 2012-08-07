@@ -69,7 +69,7 @@ alpha = 0.01
 computeCost(X, y, theta)
 
 # run gradient descent
-theta, J_history = gradientDescent(X, y, theta, alpha, iterations)
+(theta, J_history) = gradientDescent(X, y, theta, alpha, iterations)
 
 # print theta to screen
 print 'Theta found by gradient descent: '
@@ -82,6 +82,7 @@ legend(('Training data', 'Linear regression'))
 # not sure how to avoid overlaying any more plots on this figure - call figure()?
 
 # Predict values for population sizes of 35,000 and 70,000
+# note this it outputting too many times TODO fix this....
 predict1 = array([1, 3.5]) *theta
 print 'For population = 35,000, we predict a profit of %f\n' % predict1.var()*10000
 predict2 = array([1, 7]) * theta
