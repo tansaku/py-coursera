@@ -83,9 +83,9 @@ legend(('Training data', 'Linear regression'))
 
 # Predict values for population sizes of 35,000 and 70,000
 predict1 = array([1, 3.5]) *theta
-print 'For population = 35,000, we predict a profit of #f\n' % predict1*10000
+print 'For population = 35,000, we predict a profit of %f\n' % predict1.var()*10000
 predict2 = array([1, 7]) * theta
-print 'For population = 70,000, we predict a profit of #f\n' % predict2*10000
+print 'For population = 70,000, we predict a profit of %f\n' % predict2.var()*10000
 
 print 'Program paused. Press enter to continue.\n'
 raw_input()
