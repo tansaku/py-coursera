@@ -1,3 +1,5 @@
+from matplotlib.pyplot import * 
+
 def plotData(x, y):
   '''TODO the comments below are all Octave ML originals '''
   #PLOTDATA Plots the data points x and y into a new figure 
@@ -13,9 +15,11 @@ def plotData(x, y):
   #
   # Hint: You can use the 'rx' option with plot to have the markers
   #       appear as red crosses. Furthermore, you can make the
-  #       markers larger by using plot(..., 'rx', 'MarkerSize', 10);
+  #       markers larger by using plot(..., 'rx', markersize=10);
+  figure()
 
-
+  plot(x,y,'rx', markersize=10)
+  xlabel('population')
+  ylabel('profit')
 
   # ============================================================
-  return None

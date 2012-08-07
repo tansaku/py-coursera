@@ -16,8 +16,8 @@ __all__ = ['submit']
 
 # ================== CONFIGURABLES FOR EACH HOMEWORK ==================
 
-challenge_url = 'http://www.ml-class.org/course/homework/challenge'
-submit_url = 'http://www.ml-class.org/course/homework/submit'
+challenge_url = 'http://www.coursera.org/ml/assignment/challenge'
+submit_url = 'http://www.coursera.org/ml/assignment/submit'
 homework_id = '1'
 
 part_names = [

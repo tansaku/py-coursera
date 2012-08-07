@@ -26,38 +26,39 @@
 ## Initialization
 from warmUpExercise import *
 from plotData import *
+from computeCost import *
+from gradientDescent import *
 # is there any equivalent to "clear all; close all; clc"?
 
 ## ==================== Part 1: Basic Function ====================
 # Complete warmUpExercise.py 
 print 'Running warmUpExercise ... '
 print '5x5 Identity Matrix: '
-warmUpExercise()
+print warmUpExercise()
 
-print('Program paused. Press enter to continue.');
+print('Program paused. Press enter to continue.')
 #raw_input()
 
 
 ## ======================= Part 2: Plotting =======================
 print 'Plotting Data ...'
-data = loadtxt('ex1data1.txt');
-X = data[:, 0]; y = data[:, 1];
-m = len(y); # number of training examples
+data = loadtxt('ex1data1.txt')
+X = data[:, 0]; y = data[:, 1]
+m = len(y) # number of training examples
 
 # Plot Data
 # Note: You have to complete the code in plotData.m
-plotData(X, y);
+plotData(X, y)
 
 print 'Program paused. Press enter to continue.'
 #raw_input()
 
-#  ALL BELOW IS TODO
 
 
 ## =================== Part 3: Gradient descent ===================
 print 'Running Gradient Descent ...'
 
-X = array((ones((m, 1)), data[:,1])) # Add a column of ones to x
+X = hstack((ones((m, 1)), vstack(data[:,0]))) # Add a column of ones to x
 theta = zeros((2, 1)) # initialize fitting parameters
 
 # Some gradient descent settings
@@ -68,28 +69,29 @@ alpha = 0.01
 computeCost(X, y, theta)
 
 # run gradient descent
-theta = gradientDescent(X, y, theta, alpha, iterations)
+theta, J_history = gradientDescent(X, y, theta, alpha, iterations)
 
 # print theta to screen
 print 'Theta found by gradient descent: '
-print '#f #f \n', theta(1), theta(2)
+print '%f %f \n' % (theta[0].var(), theta[1].var())
 
 # Plot the linear fit
-hold on; # keep previous plot visible
-plot(X(:,2), X*theta, '-')
-legend('Training data', 'Linear regression')
-hold off # don't overlay any more plots on this figure
+#hold on; # keep previous plot visible
+plot(vstack(X[:,1]), X.dot(theta), '-')
+legend(('Training data', 'Linear regression'))
+# not sure how to avoid overlaying any more plots on this figure - call figure()?
 
 # Predict values for population sizes of 35,000 and 70,000
-predict1 = [1, 3.5] *theta
+predict1 = array([1, 3.5]) *theta
 print 'For population = 35,000, we predict a profit of #f\n' % predict1*10000
-predict2 = [1, 7] * theta
+predict2 = array([1, 7]) * theta
 print 'For population = 70,000, we predict a profit of #f\n' % predict2*10000
 
 print 'Program paused. Press enter to continue.\n'
 raw_input()
-
 '''
+#  ALL BELOW IS TODO
+
 
 ## ============= Part 4: Visualizing J(theta_0, theta_1) =============
 print('Visualizing J(theta_0, theta_1) ...\n')

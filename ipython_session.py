@@ -218,7 +218,7 @@ axis([0.5, 1, -1, 1])  # change axis scale
 
 ## display a matrix (or image)  # imshow not working for Sam on OSX 10.6.8 ...
 fig3 = figure()
-img = imshow(magic(15), cmap=gray)
+img = imshow(magic(15))
 colorbar(img)
 gray() # set the colormap to gray
 fig4 = figure()
