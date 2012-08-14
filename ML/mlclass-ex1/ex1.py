@@ -29,6 +29,7 @@ from warmUpExercise import *
 from plotData import *
 from computeCost import *
 from gradientDescent import *
+from mpl_toolkits.mplot3d import axes3d, Axes3D
 # is there any equivalent to "clear all; close all; clc"?
 
 ## ==================== Part 1: Basic Function ====================
@@ -38,7 +39,7 @@ print '5x5 Identity Matrix: '
 print warmUpExercise()
 
 print('Program paused. Press enter to continue.')
-#raw_input()
+raw_input()
 
 
 ## ======================= Part 2: Plotting =======================
@@ -49,10 +50,11 @@ m = len(y) # number of training examples
 
 # Plot Data
 # Note: You have to complete the code in plotData.m
-plotData(X, y)
+firstPlot = plotData(X, y)
+firstPlot.show()
 
 print 'Program paused. Press enter to continue.'
-#raw_input()
+raw_input()
 
 
 
@@ -85,50 +87,58 @@ legend(('Training data', 'Linear regression'))
 # Predict values for population sizes of 35,000 and 70,000
 # note this it outputting too many times TODO fix this....
 predict1 = array([1, 3.5]) *theta
-#pdb.set_trace()
 print 'For population = 35,000, we predict a profit of %f\n' % (predict1.var()*10000)
 predict2 = array([1, 7]) * theta
 print 'For population = 70,000, we predict a profit of %f\n' % (predict2.var()*10000)
 
 print 'Program paused. Press enter to continue.\n'
 raw_input()
-'''
-#  ALL BELOW IS TODO
 
 
 ## ============= Part 4: Visualizing J(theta_0, theta_1) =============
-print('Visualizing J(theta_0, theta_1) ...\n')
+print 'Visualizing J(theta_0, theta_1) ...\n'
 
 # Grid over which we will calculate J
-theta0_vals = linspace(-10, 10, 100);
-theta1_vals = linspace(-1, 4, 100);
+theta0_vals, theta1_vals = meshgrid(linspace(-10, 10, 100),linspace(-1, 4, 100))
 
 # initialize J_vals to a matrix of 0's
-J_vals = zeros(length(theta0_vals), length(theta1_vals));
+J_vals = zeros((len(theta0_vals), len(theta1_vals)))
 
 # Fill out J_vals
-for i = 1:length(theta0_vals)
-    for j = 1:length(theta1_vals)
-	  t = [theta0_vals(i); theta1_vals(j)];    
-	  J_vals(i,j) = computeCost(X, y, t);
-    end
-end
+for i in range(len(theta0_vals)):
+    for j in range(len(theta1_vals)):
+        t = vstack((theta0_vals[i], theta1_vals[j]))    
+        J_vals[i][j] = computeCost(X, y, t)
 
 
 # Because of the way meshgrids work in the surf command, we need to 
 # transpose J_vals before calling surf, or else the axes will be flipped
-J_vals = J_vals';
+J_vals = J_vals.transpose()
 # Surface plot
-figure;
-surf(theta0_vals, theta1_vals, J_vals)
-xlabel('\theta_0'); ylabel('\theta_1');
+fig = figure()
+ax = Axes3D(fig)
+#pdb.set_trace()
+ax.plot_surface(theta0_vals, theta1_vals, J_vals)
+xlabel('\\theta_0')
+ylabel('\\theta_1')
+fig.show()
 
 # Contour plot
-figure;
+fig = figure()
+ax = Axes3D(fig)
 # Plot J_vals as 15 contours spaced logarithmically between 0.01 and 100
-contour(theta0_vals, theta1_vals, J_vals, logspace(-2, 3, 20))
-xlabel('\theta_0'); ylabel('\theta_1');
-hold on;
-plot(theta(1), theta(2), 'rx', 'MarkerSize', 10, 'LineWidth', 2);
+ax.contour(theta0_vals, theta1_vals, J_vals, logspace(-2, 3, 20))
+xlabel('\\theta_0')
+ylabel('\\theta_1')
+fig.show()
 
-'''
+# TODO want this to be plotted onto firstPlot, but not sure how
+firstPlot.show()
+plot(theta[0], theta[1], 'rx', markersize=10, linewidth=2)
+firstPlot.show()
+
+print 'Program paused. Press enter to continue. Note figures will disappear when Python process ends\n'
+raw_input()
+
+
+

@@ -5,7 +5,8 @@ def plotData(x, y):
   #PLOTDATA Plots the data points x and y into a new figure 
   #   PLOTDATA(x,y) plots the data points and gives the figure axes labels of
   #   population and profit.
-
+  
+  fig = figure()
   # ====================== YOUR CODE HERE ======================
   # Instructions: Plot the training data into a figure using the 
   #               "figure" and "plot" commands. Set the axes labels using
@@ -16,10 +17,8 @@ def plotData(x, y):
   # Hint: You can use the 'rx' option with plot to have the markers
   #       appear as red crosses. Furthermore, you can make the
   #       markers larger by using plot(..., 'rx', markersize=10);
-  figure()
 
-  plot(x,y,'rx', markersize=10)
-  xlabel('population')
-  ylabel('profit')
+
 
   # ============================================================
+  return fig
