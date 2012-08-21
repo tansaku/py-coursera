@@ -11,6 +11,8 @@ from urllib import urlopen, urlencode
 from random import sample
 import os.path
 from numpy import *
+import pdb
+import json
 
 __all__ = ['submit']
 
@@ -31,16 +33,16 @@ part_names = [
     ]
 
 srcs = [
-    'warmup_exercise.py',
-    'compute_cost.py',
-    'gradient_descent.py',
-    'feature_normalize.py',
-    'compute_cost_multi.py',
-    'gradient_descent_multi.py',
-    'normal_eqn.py',
+    'warmUpExercise.py',
+    'computeCost.py',
+    'gradientDescent.py',
+    'featureNormalize.py',
+    'computeCostMulti.py',
+    'gradientDescentMulti.py',
+    'normalEqn.py',
     ]
 
-def output(part_id):
+def output(part_id, auxstring):
     X1 = matrix([ones(20), exp(1) + exp(2) * arange(0.1, 2.1, 0.1)]).T
     Y1 = X1[:,1] + sin(X1[:,0]) + cos(X1[:,1])
     X2 = hstack((X1, power(X1[:,1], 0.5), power(X1[:,1], 0.25)))
@@ -92,14 +94,14 @@ def submit(part_id=None):
     for part_id in submit_parts:
         # Submit this part
         # Get Challenge
-        login, ch, signature = get_challenge(login)
+        login, ch, signature, auxstring = get_challenge(login)
         if not login or not ch or not signature:
             # Some error occured, error string in first return element.
             print '\n!! Error: %s\n' % login
             return
 
         ch_resp = challenge_response(login, password, ch)
-        result, s = submit_solution(login, ch_resp, part_id, output(part_id), source(part_id), signature)
+        result, s = submit_solution(login, ch_resp, part_id, output(part_id, auxstring), source(part_id), signature)
         print '\n== [ml-class] Submitted Homework %s - Part %d - %s' % (
                 homework_id, part_id, part_names[part_id-1])
         print '== %s' % s.strip()
@@ -165,20 +167,26 @@ def source(part_id):
 
 def get_challenge(email):
     f = urlopen(challenge_url, urlencode({'email_address': email}))
+    #pdb.set_trace()
     try:
-        return f.read().strip().split('|')
+        incoming = json.loads(f.read().strip())
+        login = incoming['email_address']
+        ch = incoming['challenge_key']
+        signature = incoming['state']
+        auxstring = incoming['challenge_aux_data']
+        return login, ch, signature, auxstring
     finally:
         f.close()
 
 def submit_solution(email, ch_resp, part, output, source, signature):
+    #pdb.set_trace()
     params = {
-    'homework': homework_id,
-    'part': str(part),
-    'email': email,
-    'output': output,
-    'source': source,
+    'assignment_part_sid': homework_id +'-'+ str(part),
+    'email_address': email,
+    'submission': output,
+    'submission_aux': source,
     'challenge_response': ch_resp,
-    'signature': signature }
+    'state': signature }
 
     f = urlopen(submit_url, urlencode(params))
     try:
