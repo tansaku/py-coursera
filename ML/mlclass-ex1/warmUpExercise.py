@@ -12,7 +12,7 @@ def warmUpExercise():
   #               so just set A accordingly. 
 
 
-  A = eye(5)
+  
 
 
 
