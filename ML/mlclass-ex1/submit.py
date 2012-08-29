@@ -1,8 +1,5 @@
-#  I got this script from someone in the fall '11 ML class and I am embarressed to say I don't remember their name
-# and since the class has gone off line I can't review the forums to work out who it was ...
-# as a result I can't give credit where credit is due, except to say it is to an otherwise anonymous coder ...
-
-# note the upload URLs are from the Fall '11 class, so these will have to be updated ot work with any new ML class
+#  I got the base for this script from Ioura Batugowski in the fall '11 ML class and made a few changes for them 
+# to work with the latest ML course, along with some additional input from Ioura
 
 from getpass import getpass
 import sha
