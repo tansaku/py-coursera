@@ -13,13 +13,14 @@ import os.path
 from numpy import *
 import pdb
 import json
+from base64 import b64encode
 
 __all__ = ['submit']
 
 # ================== CONFIGURABLES FOR EACH HOMEWORK ==================
 
-challenge_url = 'http://class.coursera.org/ml-2012-002/assignment/challenge'
-submit_url = 'http://class.coursera.org/ml-2012-002/assignment/submit'
+challenge_url = 'https://class.coursera.org/ml-2012-002/assignment/challenge'
+submit_url = 'https://class.coursera.org/ml-2012-002/assignment/submit'
 homework_id = '1'
 
 part_names = [
@@ -144,11 +145,7 @@ def login_prompt():
     return login, password
 
 def challenge_response(email, passwd, challenge):
-    salt = ')~/|]QMB3[!W`?OVt7qC"@+}'
-    s = sha.new(salt + email + passwd).hexdigest()
-    s = sha.new(challenge + s).hexdigest()
-    sel = sample(xrange(len(s)), 16)
-    return ''.join(s[i] for i in sorted(sel))
+    return sha.new(challenge + passwd).hexdigest()
 
 def source(part_id):
     fname = srcs[part_id-1]
@@ -183,8 +180,8 @@ def submit_solution(email, ch_resp, part, output, source, signature):
     params = {
     'assignment_part_sid': homework_id +'-'+ str(part),
     'email_address': email,
-    'submission': output,
-    'submission_aux': source,
+    'submission': b64encode(output),
+    'submission_aux': b64encode(source),
     'challenge_response': ch_resp,
     'state': signature }
 
