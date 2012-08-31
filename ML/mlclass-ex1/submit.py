@@ -41,9 +41,9 @@ srcs = [
     ]
 
 def output(part_id, auxstring):
-    X1 = matrix([ones(20), exp(1) + exp(2) * arange(0.1, 2.1, 0.1)]).T
+    X1 = array([ones(20), exp(1) + exp(2) * arange(0.1, 2.1, 0.1)]).T
     Y1 = X1[:,1] + sin(X1[:,0]) + cos(X1[:,1])
-    X2 = hstack((X1, power(X1[:,1], 0.5), power(X1[:,1], 0.25)))
+    X2 = vstack((X1.transpose(), power(X1[:,1], 0.5), power(X1[:,1], 0.25))).transpose()
     Y2 = power(Y1, 0.5) + Y1
 
     fname = srcs[part_id-1].rsplit('.',1)[0]
@@ -53,15 +53,15 @@ def output(part_id, auxstring):
     if part_id == 1:
         return sprintf('%0.5f ', func())
     elif part_id == 2:
-        return sprintf('%0.5f ', func(X1, Y1, matrix([0.5, -0.5]).T))
+        return sprintf('%0.5f ', func(X1, Y1, array([0.5, -0.5]).T))
     elif part_id == 3:
-        return sprintf('%0.5f ', func(X1, Y1, matrix([0.5, -0.5]).T, 0.01, 10))
+        return sprintf('%0.5f ', func(X1, Y1, array([0.5, -0.5]).T, 0.01, 10))
     elif part_id == 4:
         return sprintf('%0.5f ', func(X2[:,1:4]))
     elif part_id == 5:
-        return sprintf('%0.5f ', func(X2, Y2, matrix([0.1, 0.2, 0.3, 0.4]).T))
+        return sprintf('%0.5f ', func(X2, Y2, array([0.1, 0.2, 0.3, 0.4]).T))
     elif part_id == 6:
-        return sprintf('%0.5f ', func(X2, Y2, matrix([-0.1, -0.2, -0.3, -0.4]).T, 0.01, 10))
+        return sprintf('%0.5f ', func(X2, Y2, array([-0.1, -0.2, -0.3, -0.4]).T, 0.01, 10))
     elif part_id == 7:
         return sprintf('%0.5f ', func(X2, Y2))
 

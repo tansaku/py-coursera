@@ -1,5 +1,6 @@
 from numpy import *
 from computeCost import *
+import pdb
 
 def gradientDescent(X, y, theta, alpha, num_iters):
   #GRADIENTDESCENT Performs gradient descent to learn theta
@@ -19,14 +20,15 @@ def gradientDescent(X, y, theta, alpha, num_iters):
       # Hint: While debugging, it can be useful to print out the values
       #       of the cost function (computeCost) and gradient here.
       #
-
+      # use "pdb.set_trace()" to drop into the debugger at this point
+      
 
 
 
       # ============================================================
 
       # Save the cost J in every iteration    
-  	J_history[iteration] = computeCost(X, y, theta)
-  	#J_history(iter)
+      J_history[iteration] = computeCost(X, y, theta)
+      #J_history(iter)
 
   return (theta, J_history)

@@ -19,6 +19,5 @@ def plotData(x, y):
   #       markers larger by using plot(..., 'rx', markersize=10);
 
 
-
   # ============================================================
   return fig

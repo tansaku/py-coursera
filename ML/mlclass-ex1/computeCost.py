@@ -1,3 +1,6 @@
+import pdb
+from numpy import *
+
 def computeCost(X, y, theta):
   #COMPUTECOST Compute cost for linear regression
   #   J = COMPUTECOST(X, y, theta) computes the cost of using theta as the
@@ -13,9 +16,10 @@ def computeCost(X, y, theta):
   # Instructions: Compute the cost of a particular choice of theta
   #               You should set J to the cost.
 
-
-
-
+  # use "pdb.set_trace()" to drop into the debugger at this point
+  
+  
+  
   # =========================================================================
 
   return J

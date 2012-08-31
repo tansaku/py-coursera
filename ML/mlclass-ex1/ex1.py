@@ -49,7 +49,7 @@ X = data[:, 0]; y = data[:, 1]
 m = len(y) # number of training examples
 
 # Plot Data
-# Note: You have to complete the code in plotData.m
+# Note: You have to complete the code in plotData.py
 firstPlot = plotData(X, y)
 firstPlot.show()
 
@@ -73,10 +73,11 @@ computeCost(X, y, theta)
 
 # run gradient descent
 (theta, J_history) = gradientDescent(X, y, theta, alpha, iterations)
+#pdb.set_trace()
 
 # print theta to screen
 print 'Theta found by gradient descent: '
-print '%f %f \n' % (theta[0].var(), theta[1].var())
+print '%f %f \n' % (theta[0][0], theta[1][0])
 
 # Plot the linear fit
 #hold on; # keep previous plot visible
@@ -86,10 +87,11 @@ legend(('Training data', 'Linear regression'))
 
 # Predict values for population sizes of 35,000 and 70,000
 # note this it outputting too many times TODO fix this....
-predict1 = array([1, 3.5]) *theta
-print 'For population = 35,000, we predict a profit of %f\n' % (predict1.var()*10000)
-predict2 = array([1, 7]) * theta
-print 'For population = 70,000, we predict a profit of %f\n' % (predict2.var()*10000)
+predict1 = array([1, 3.5]).dot(theta)
+#pdb.set_trace()
+print 'For population = 35,000, we predict a profit of %f\n' % (predict1[0]*10000.)
+predict2 = array([1, 7]).dot(theta)
+print 'For population = 70,000, we predict a profit of %f\n' % (predict2[0]*10000.)
 
 print 'Program paused. Press enter to continue.\n'
 raw_input()
@@ -107,7 +109,7 @@ J_vals = zeros((len(theta0_vals), len(theta1_vals)))
 # Fill out J_vals
 for i in range(len(theta0_vals)):
     for j in range(len(theta1_vals)):
-        t = vstack((theta0_vals[i], theta1_vals[j]))    
+        t = vstack((theta0_vals[i], theta1_vals[j])) 
         J_vals[i][j] = computeCost(X, y, t)
 
 
