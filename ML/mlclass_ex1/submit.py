@@ -135,10 +135,8 @@ def is_valid_part(part_id):
     return part_id and 1 <= part_id <= len(part_names)+1
 
 def login_prompt():
-    #login = raw_input('login (Email address): ')
-    #password = getpass('Password: ')
-    login = 'ibatugow@gmail.com'
-    password = 'PnVAqzbfdM'
+    login = raw_input('login (Email address): ')
+    password = getpass('Password: ')
     return login, password
 
 def challenge_response(email, passwd, challenge):
