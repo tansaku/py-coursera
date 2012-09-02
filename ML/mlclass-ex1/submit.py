@@ -1,16 +1,18 @@
-#  I got the base for this script from Ioura Batugowski in the fall '11 ML class and made a few changes for them 
+#  I got the base for this script from Ioura Batugowski in the fall '11 ML class and made a few changes for them
 # to work with the latest ML course, along with some additional input from Ioura
 
 from getpass import getpass
 import sha
 import random
-from urllib import urlopen, urlencode
+from urllib import urlencode
+from urllib2 import urlopen
 from random import sample
 import os.path
 from numpy import *
 import pdb
 import json
 from base64 import b64encode
+from contextlib import closing
 
 __all__ = ['submit']
 
@@ -43,7 +45,7 @@ srcs = [
 def output(part_id, auxstring):
     X1 = array([ones(20), exp(1) + exp(2) * arange(0.1, 2.1, 0.1)]).T
     Y1 = X1[:,1] + sin(X1[:,0]) + cos(X1[:,1])
-    X2 = vstack((X1.transpose(), power(X1[:,1], 0.5), power(X1[:,1], 0.25))).transpose()
+    X2 = vstack((X1.T, X1[:,1] ** 0.5, X1[:,1] ** 0.25)).T
     Y2 = power(Y1, 0.5) + Y1
 
     fname = srcs[part_id-1].rsplit('.',1)[0]
@@ -53,15 +55,15 @@ def output(part_id, auxstring):
     if part_id == 1:
         return sprintf('%0.5f ', func())
     elif part_id == 2:
-        return sprintf('%0.5f ', func(X1, Y1, array([0.5, -0.5]).T))
+        return sprintf('%0.5f ', func(X1, Y1, array([0.5, -0.5])))
     elif part_id == 3:
-        return sprintf('%0.5f ', func(X1, Y1, array([0.5, -0.5]).T, 0.01, 10))
+        return sprintf('%0.5f ', func(X1, Y1, array([0.5, -0.5]), 0.01, 10))
     elif part_id == 4:
         return sprintf('%0.5f ', func(X2[:,1:4]))
     elif part_id == 5:
-        return sprintf('%0.5f ', func(X2, Y2, array([0.1, 0.2, 0.3, 0.4]).T))
+        return sprintf('%0.5f ', func(X2, Y2, array([0.1, 0.2, 0.3, 0.4])))
     elif part_id == 6:
-        return sprintf('%0.5f ', func(X2, Y2, array([-0.1, -0.2, -0.3, -0.4]).T, 0.01, 10))
+        return sprintf('%0.5f ', func(X2, Y2, array([-0.1, -0.2, -0.3, -0.4]), 0.01, 10))
     elif part_id == 7:
         return sprintf('%0.5f ', func(X2, Y2))
 
@@ -92,7 +94,7 @@ def submit(part_id=None):
     for part_id in submit_parts:
         # Submit this part
         # Get Challenge
-        login, ch, signature, auxstring = get_challenge(login)
+        login, ch, signature, auxstring = get_challenge(login, part_id)
         if not login or not ch or not signature:
             # Some error occured, error string in first return element.
             print '\n!! Error: %s\n' % login
@@ -112,13 +114,9 @@ def sprintf(fmt, arg):
         # for multiple return values, only use the first one
         arg = arg[0]
 
-    if isinstance(arg, matrix):
-        # convert to array for easier serialization
-        arg = array(arg)
-
-    if isinstance(arg, ndarray):
+    if isinstance(arg, (ndarray, list)):
         # concatenates all elements, column by column
-        return ''.join(fmt % e for e in arg.T.reshape(arg.size))
+        return ''.join(fmt % e for e in asarray(arg).ravel('F'))
     else:
         return fmt % arg
 
@@ -137,8 +135,10 @@ def is_valid_part(part_id):
     return part_id and 1 <= part_id <= len(part_names)+1
 
 def login_prompt():
-    login = raw_input('login (Email address): ')
-    password = getpass('Password: ')
+    #login = raw_input('login (Email address): ')
+    #password = getpass('Password: ')
+    login = 'ibatugow@gmail.com'
+    password = 'PnVAqzbfdM'
     return login, password
 
 def challenge_response(email, passwd, challenge):
@@ -159,18 +159,20 @@ def source(part_id):
         f.close()
     return src
 
-def get_challenge(email):
-    f = urlopen(challenge_url, urlencode({'email_address': email}))
+def get_challenge(email, part):
+    params = {
+        'email_address': email,
+        'response_encoding' : 'json',
+        'assignment_part_sid': homework_id +'-'+ str(part) }
+
     #pdb.set_trace()
-    try:
+    with closing(urlopen(challenge_url, urlencode(params))) as f:
         incoming = json.loads(f.read().strip())
         login = incoming['email_address']
         ch = incoming['challenge_key']
         signature = incoming['state']
         auxstring = incoming['challenge_aux_data']
         return login, ch, signature, auxstring
-    finally:
-        f.close()
 
 def submit_solution(email, ch_resp, part, output, source, signature):
     #pdb.set_trace()
