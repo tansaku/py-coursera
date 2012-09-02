@@ -1,0 +1,9 @@
+from warmUpExercise import warmUpExercise
+from computeCost import computeCost
+from gradientDescent import gradientDescent
+from computeCostMulti import computeCostMulti
+from gradientDescentMulti import gradientDescentMulti
+from normalEqn import normalEqn
+from featureNormalize import featureNormalize
+
+from plotData import plotData
