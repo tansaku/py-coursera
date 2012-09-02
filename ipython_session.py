@@ -1,6 +1,8 @@
 # Machine learning class (sort of ...)
 # iPython tutorial 
 
+# note full script of the Octave tutorial now available here: https://share.coursera.org/wiki/index.php/ML:Octave_Tutorial
+
 # =======================================================
 # Section 1: iPython Tutorial: Basic operations
 
@@ -48,13 +50,13 @@ print '2 decimals: %0.2f and 6 decimals: %0.6f' % (a, d) # for multiple need to 
 # SRHJ doesn't seem to be required in my enthought distribution - is already pre-imported I believe
 
 
-A = np.array([[1, 2], [3, 4], [5, 6]])  # Octave was A = [1 2; 3 4; 5 6]
+A = array([[1, 2], [3, 4], [5, 6]])  # Octave was A = [1 2; 3 4; 5 6]
 # would be nice if numpy had a pretty print option for arrays that we could turn on by default ...
 
 v = hstack((1,2,3))        # Octave was v = [1 2 3]
 v = vstack((1,2,3))  #  Octave was v = [1; 2; 3] -- vstack takes a tuple of arrays (or single values in this case
-v = np.linspace(1, 2, 11)   # from 1 to 2, with stepsize of 0.1. Useful for plot axes?  this was v = [1:0.1:2]
-v = np.arange(1,7)        # from 1 to 7 exclusive, assumes stepsize of 1.  this was v = 1:6
+v = linspace(1, 2, 11)   # from 1 to 2, with stepsize of 0.1. Useful for plot axes?  this was v = [1:0.1:2]
+v = arange(1,7)        # from 1 to 7 exclusive, assumes stepsize of 1.  this was v = 1:6
 
 q = ones([5, 3, 2]) # multidimensional array
 

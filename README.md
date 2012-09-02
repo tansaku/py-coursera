@@ -51,4 +51,4 @@ email [sjoseph@hpu.edu](mailto:sjoseph@hpu.edu).
 [IPSession]: https://github.com/tansaku/py-coursera/blob/master/ipython_session.py
 [OrigDisc]: https://class.coursera.org/pgm/forum/thread?thread_id=2382
 
-Many thanks to all Contributors including [Jeff Tratner](https://github.com/jtratner), Arthur Dent, Andrew Clegg
+Many thanks to all Contributors including [Jeff Tratner](https://github.com/jtratner), Arthur Dent, Andrew Clegg and Ioura Batugowski
