@@ -55,7 +55,7 @@ print 'Normalizing Features ...'
 X, mu, sigma = featureNormalize(X)
 
 # Add intercept term to X
-X = hstack((ones((m,1)), X))
+X = column_stack((ones(m), X))
 
 
 ## ================ Part 2: Gradient Descent ================
@@ -139,7 +139,7 @@ y = data[:, 2]
 m = len(y)
 
 # Add intercept term to X
-X = hstack((ones((m,1)), X))
+X = column_stack((ones(m), X))
 
 # Calculate the parameters from the normal equation
 theta = normalEqn(X, y)

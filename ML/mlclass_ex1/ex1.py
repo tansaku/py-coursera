@@ -60,7 +60,7 @@ raw_input()
 ## =================== Part 3: Gradient descent ===================
 print 'Running Gradient Descent ...'
 
-X = hstack((ones((m, 1)), vstack(data[:,0]))) # Add a column of ones to x
+X = column_stack((ones(m), data[:,0])) # Add a column of ones to x
 theta = zeros(2) # initialize fitting parameters
 
 # Some gradient descent settings

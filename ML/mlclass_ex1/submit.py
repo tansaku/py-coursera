@@ -43,9 +43,9 @@ srcs = [
     ]
 
 def output(part_id, auxstring):
-    X1 = array([ones(20), exp(1) + exp(2) * arange(0.1, 2.1, 0.1)]).T
+    X1 = column_stack((ones(20), exp(1) + exp(2) * linspace(0.1, 20., 20)))
     Y1 = X1[:,1] + sin(X1[:,0]) + cos(X1[:,1])
-    X2 = vstack((X1.T, X1[:,1] ** 0.5, X1[:,1] ** 0.25)).T
+    X2 = column_stack((X1, X1[:,1]**0.5, X1[:,1]**0.25))
     Y2 = power(Y1, 0.5) + Y1
 
     fname = srcs[part_id-1].rsplit('.',1)[0]
