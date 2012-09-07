@@ -18,14 +18,14 @@
 
 from numpy import *
 from matplotlib.pyplot import *
-from mpl_toolkits.mplot3d import axes3d, Axes3D
+from scipy import optimize
 from mlclass_ex2 import *
 
 ## Load Data
 #  The first two columns contains the exam scores and the third column
 #  contains the label.
 
-data = loadtxt('ex2data1.txt', delimiter=',');
+data = loadtxt('ex2data1.txt', delimiter=',')
 X = data[:,:2]
 y = data[:, 2]
 
@@ -71,11 +71,65 @@ cost, grad = costFunction(initial_theta, X, y)
 
 print 'Cost at initial theta (zeros): ', cost
 print 'Gradient at initial theta (zeros):'
-print '', grad
+print grad
 
 print '\nProgram paused. Press enter to continue.'
 raw_input()
 
 
+## ============= Part 3: Optimizing using fminunc  =============
+#  In this exercise, you will use a built-in function (fminunc) to find the
+#  optimal parameters theta.
 
+#  Run minimize to obtain the optimal theta
+res = optimize.minimize(costFunction, initial_theta, args=(X,y), \
+                        method='BFGS', jac=True, options={'maxiter':400})
+
+#  Extract theta and the cost from the result of minimize
+theta = res.x
+cost = res.fun
+
+# Print theta to screen
+print 'Cost at theta found by minimize: ', cost
+print 'theta:', theta
+
+# Plot Boundary
+fig = plotDecisionBoundary(theta, X, y)
+
+# Put some labels
+hold(True)
+xlabel('Exam 1 score')
+ylabel('Exam 2 score')
+hold(False)
+fig.show()
+
+print '\nProgram paused. Press enter to continue.'
+raw_input()
+
+
+## ============== Part 4: Predict and Accuracies ==============
+#  After learning the parameters, you'll like to use it to predict the outcomes
+#  on unseen data. In this part, you will use the logistic regression model
+#  to predict the probability that a student with score 45 on exam 1 and
+#  score 85 on exam 2 will be admitted.
+#
+#  Furthermore, you will compute the training and test set accuracies of
+#  our model.
+#
+#  Your task is to complete the code in predict.m
+
+#  Predict probability for a student with score 45 on exam 1
+#  and score 85 on exam 2
+
+prob = sigmoid(dot([1, 45, 85],theta))
+print 'For a student with scores 45 and 85, we predict an admission ' \
+      'probability of %f\n' % prob
+
+# Compute accuracy on our training set
+p = predict(theta, X)
+
+print 'Train Accuracy: %f\n' % (mean(p == y) * 100)
+
+print '\nProgram paused. Press enter to continue.'
+raw_input()
 
