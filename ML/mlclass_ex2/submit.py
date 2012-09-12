@@ -20,52 +20,48 @@ __all__ = ['submit']
 
 challenge_url = 'https://class.coursera.org/ml-2012-002/assignment/challenge'
 submit_url = 'https://class.coursera.org/ml-2012-002/assignment/submit'
-homework_id = '1'
+homework_id = '2'
 
 part_names = [
-    'Warm up exercise',
-    'Computing Cost (for one variable)',
-    'Gradient Descent (for one variable)',
-    'Feature Normalization',
-    'Computing Cost (for multiple variables)',
-    'Gradient Descent (for multiple variables)',
-    'Normal Equations',
+    'Sigmoid Function',
+    'Logistic Regression Cost',
+    'Logistic Regression Gradient',
+    'Predict',
+    'Regularized Logistic Regression Cost',
+    'Regularized Logistic Regression Gradient',
     ]
 
 srcs = [
-    'warmUpExercise.py',
-    'computeCost.py',
-    'gradientDescent.py',
-    'featureNormalize.py',
-    'computeCostMulti.py',
-    'gradientDescentMulti.py',
-    'normalEqn.py',
+    'sigmoid.py',
+    'costFunction.py',
+    'costFunction.py',
+    'predict.py',
+    'costFunctionReg.py',
+    'costFunctionReg.py',
     ]
 
 def output(part_id, auxstring):
-    X1 = array([ones(20), exp(1) + exp(2) * arange(0.1, 2.1, 0.1)]).T
-    Y1 = X1[:,1] + sin(X1[:,0]) + cos(X1[:,1])
-    X2 = vstack((X1.T, X1[:,1] ** 0.5, X1[:,1] ** 0.25)).T
-    Y2 = power(Y1, 0.5) + Y1
+    X = column_stack((ones(20),
+                      exp(1)*sin(linspace(1,20,20)),
+                      exp(0.5)*cos(linspace(1,20,20))))
+    y = sin(X[:,0] + X[:,1]) > 0
 
     fname = srcs[part_id-1].rsplit('.',1)[0]
     mod = __import__(fname, fromlist=[fname], level=1)
     func = getattr(mod, fname)
 
     if part_id == 1:
-        return sprintf('%0.5f ', func())
+        return sprintf('%0.5f ', func(X))
     elif part_id == 2:
-        return sprintf('%0.5f ', func(X1, Y1, array([0.5, -0.5])))
+        return sprintf('%0.5f ', func(array([0.25, 0.5, -0.5]), X, y)[0])
     elif part_id == 3:
-        return sprintf('%0.5f ', func(X1, Y1, array([0.5, -0.5]), 0.01, 10))
+        return sprintf('%0.5f ', func(array([0.25, 0.5, -0.5]), X, y)[1])
     elif part_id == 4:
-        return sprintf('%0.5f ', func(X2[:,1:4]))
+        return sprintf('%0.5f ', func(array([0.25, 0.5, -0.5]), X))
     elif part_id == 5:
-        return sprintf('%0.5f ', func(X2, Y2, array([0.1, 0.2, 0.3, 0.4])))
+        return sprintf('%0.5f ', func(array([0.25, 0.5, -0.5]), X, y, 0.1)[0])
     elif part_id == 6:
-        return sprintf('%0.5f ', func(X2, Y2, array([-0.1, -0.2, -0.3, -0.4]), 0.01, 10))
-    elif part_id == 7:
-        return sprintf('%0.5f ', func(X2, Y2))
+        return sprintf('%0.5f ', func(array([0.25, 0.5, -0.5]), X, y, 0.1)[1])
 
 # ============================== SUBMIT ===============================
 
@@ -135,10 +131,8 @@ def is_valid_part(part_id):
     return part_id and 1 <= part_id <= len(part_names)+1
 
 def login_prompt():
-    #login = raw_input('login (Email address): ')
-    #password = getpass('Password: ')
-    login = 'ibatugow@gmail.com'
-    password = 'PnVAqzbfdM'
+    login = raw_input('login (Email address): ')
+    password = getpass('Password: ')
     return login, password
 
 def challenge_response(email, passwd, challenge):
