@@ -1,4 +1,4 @@
-from mlclass_ex2 import *
+from costFunction import costFunction
 from numpy import *
 
 def costFunctionReg(theta, X, y, lambda_):

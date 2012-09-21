@@ -28,7 +28,12 @@ import pdb
 from numpy import *
 from matplotlib.pyplot import *
 from mpl_toolkits.mplot3d import axes3d, Axes3D
-from mlclass_ex1 import *
+
+from warmUpExercise import warmUpExercise
+from plotData import plotData
+from computeCost import computeCost
+from gradientDescent import gradientDescent
+
 # is there any equivalent to "clear all; close all; clc"?
 
 ## ==================== Part 1: Basic Function ====================

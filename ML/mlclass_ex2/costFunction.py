@@ -1,4 +1,4 @@
-from mlclass_ex2 import *
+from sigmoid import sigmoid
 from numpy import *
 
 def costFunction(theta, X, y):

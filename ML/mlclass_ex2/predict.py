@@ -1,5 +1,4 @@
 from numpy import *
-from mlclass_ex2 import *
 
 def predict(theta, X):
     #PREDICT Predict whether the label is 0 or 1 using learned logistic

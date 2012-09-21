@@ -19,7 +19,12 @@
 from numpy import *
 from matplotlib.pyplot import *
 from scipy import optimize
-from mlclass_ex2 import *
+
+from plotData import plotData
+from costFunctionReg import costFunctionReg
+from mapFeature import mapFeature
+from plotDecisionBoundary import plotDecisionBoundary
+from predict import predict
 
 ## Load Data
 #  The first two columns contains the X values and the third column

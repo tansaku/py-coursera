@@ -19,7 +19,13 @@
 from numpy import *
 from matplotlib.pyplot import *
 from scipy import optimize
-from mlclass_ex2 import *
+
+from plotData import plotData
+from costFunction import costFunction
+from plotDecisionBoundary import plotDecisionBoundary
+from sigmoid import sigmoid
+from predict import predict
+
 
 ## Load Data
 #  The first two columns contains the exam scores and the third column
