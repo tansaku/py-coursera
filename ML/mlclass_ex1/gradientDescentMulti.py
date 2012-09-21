@@ -1,5 +1,5 @@
 from numpy import *
-from computeCostMulti import *
+from computeCostMulti import computeCostMulti
 
 def gradientDescentMulti(X, y, theta, alpha, num_iters):
     #GRADIENTDESCENTMULTI Performs gradient descent to learn theta

@@ -27,7 +27,11 @@
 from numpy import *
 from matplotlib.pyplot import *
 from mpl_toolkits.mplot3d import axes3d, Axes3D
-from mlclass_ex1 import *
+
+from featureNormalize import featureNormalize
+from gradientDescentMulti import gradientDescentMulti
+from normalEqn import normalEqn
+
 
 ## Initialization
 
